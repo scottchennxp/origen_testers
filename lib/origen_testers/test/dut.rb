@@ -20,12 +20,17 @@ module OrigenTesters
         add_pin :tdi
         add_pin :tdo
         add_pin :tms
+        # add_pin_group :jtag, :tdi, :tdo, :tms
+        add_power_pin_group :vdd1
+        add_power_pin_group :vdd2
+        add_virtual_pin :virtual1, type: :virtual_pin
+        add_virtual_pin :virtual2, type: :ate_ch
 
-        add_reg32 :testme32, 0x007a do
-          bits 31..16, :portB
-          bits 15..8,  :portA
-          bits 1,      :done
-          bits 0,      :enable
+        reg :testme32, 0x007a do |reg|
+          reg.bits 31..16, :portB
+          reg.bits 15..8,  :portA
+          reg.bits 1,      :done
+          reg.bits 0,      :enable
         end
         @hv_supply_pin = 'VDDHV'
         @lv_supply_pin = 'VDDLV'
